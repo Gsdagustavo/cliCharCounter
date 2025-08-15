@@ -15,6 +15,10 @@ func main() {
 	// parse all flags
 	flag.Parse()
 
+	if len(*letter) != 1 {
+		log.Fatal("please provide a letter to search for")
+	}
+
 	// opens connection with file
 	file, err := os.Open(*filePath)
 
