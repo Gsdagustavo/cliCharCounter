@@ -39,9 +39,10 @@ func main() {
 
 	fmt.Printf("Occurrences of the letter %v in the file: %v", *letter, count)
 
-	_ = file.Close()
+	defer file.Close()
 }
 
+// returns a string representing the content of a given File
 func readFile(file *os.File) (string, error) {
 	bytes, err := io.ReadAll(io.Reader(file))
 
@@ -52,11 +53,12 @@ func readFile(file *os.File) (string, error) {
 	return string(bytes), nil
 }
 
-func countLetter(str string, letter rune) int {
+// returns an integer representing the number of occurrences of a rune (letter) in the given text
+func countLetter(text string, letter rune) int {
 	count := 0
 
-	for _, c := range str {
-		if c == letter {
+	for _, char := range text {
+		if char == letter {
 			count++
 		}
 	}
